@@ -25,8 +25,10 @@ public:
 		auto task = std::bind(std::forward<F>(f), std::forward<Args>(args)...);
 		//bind the function and its args together
 		{
-		std::lock_guard<std::mutex> lock{ queue_mutex_ };
-		tasks_.push(task);
+			std::lock_guard<std::mutex> lock{ queue_mutex_ };
+			if(!running_)
+				return false;
+			tasks_.push(task);
 		}
 		condition_.notify_one();
 		return true;
