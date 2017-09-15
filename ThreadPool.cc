@@ -25,8 +25,8 @@ ThreadPool::~ThreadPool() {
 
 void ThreadPool::thread_process() {
 	while(this->running_) {
-		std::cout<<"thread "<<std::this_thread::get_id()<<" is running"<<std::endl;
-		std::cout<<"queue size:"<<this->tasks_.size()<<std::endl;
+		//std::cout<<"thread "<<std::this_thread::get_id()<<" is running"<<std::endl;
+		//std::cout<<"queue size:"<<this->tasks_.size()<<std::endl;
 		Task task;
 		{
 			std::unique_lock<std::mutex> lock{ this->queue_mutex_ };
